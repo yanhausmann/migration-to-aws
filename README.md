@@ -1,5 +1,5 @@
 ## PARA ACESSAR A DOCUMENTAÇÃO DO PROJETO FINALIZADO:
-[Acesse a documentação aqui](https://yanhausmann.github.io/migration-to-aws/modulo7-iac_tooling/)
+[Acesse a documentação aqui](https://yanhausmann.github.io/migration-to-aws/modulo7-iac_tooling/ACESSE-Documenta%C3%A7%C3%A3o%20Geral.html)
 ________________________________________________________________________________________________
 
 *DESAFIO FINAL*
