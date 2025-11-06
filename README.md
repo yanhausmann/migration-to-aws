@@ -1,3 +1,8 @@
+## PARA ACESSAR A DOCUMENTAÇÃO DO PROJETO FINALIZADO:
+[Acesse a documentação aqui](https://yanhausmann.github.io/migration-to-aws/modulo7-iac_tooling/)
+________________________________________________________________________________________________
+
+*DESAFIO FINAL*
 # migration-to-aws
 Exercício final modulo 7
 
