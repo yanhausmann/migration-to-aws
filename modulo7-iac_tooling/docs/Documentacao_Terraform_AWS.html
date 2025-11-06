@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação Terraform - AWS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 35px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #FF9900;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .back-button:hover {
+            background: #ec7211;
+        }
+
+        h1 {
+            color: #232F3E;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            border-bottom: 3px solid #FF9900;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: #232F3E;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #c7254e;
+            font-size: 0.9rem;
+        }
+
+        pre {
+            background: #232F3E;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 12px 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            border-left: 4px solid #FF9900;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .warning-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        table th {
+            background: #232F3E;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../ACESSE-Documentação Geral.html" class="back-button">← Voltar</a>
+
+        <h1>Documentação Terraform - AWS S3 + CloudFront</h1>
+        
+        <p>Este projeto <strong>Terraform</strong> cria uma infraestrutura segura na AWS para hospedar um site estático utilizando <strong>Amazon S3</strong> e <strong>CloudFront</strong> com <strong>Origin Access Identity (OAI)</strong>.</p>
+
+        <div class="section">
+            <h2>Estrutura do Projeto</h2>
+            <p>O código está dividido em blocos principais:</p>
+            <ul>
+                <li><strong>Variáveis</strong> - Configurações parametrizáveis</li>
+                <li><strong>Recursos (Resources)</strong> - Componentes da infraestrutura AWS</li>
+                <li><strong>Outputs</strong> - Informações importantes após a criação</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>1. Provedor e Variáveis</h2>
+            
+            <h3>Provedor AWS</h3>
+            <p>Define o provedor da AWS e a região onde os recursos serão criados:</p>
+            <pre><code>provider "aws" {
+  region = var.aws_region
+}</code></pre>
+
+            <h3>Variáveis Principais</h3>
+            <ul>
+                <li><code>aws_region</code>: Região onde os recursos serão criados (padrão: <code>us-east-1</code>)</li>
+                <li><code>project_name</code>: Nome base do projeto (padrão: <code>jewelryan-app</code>)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>2. Criação do Bucket S3</h2>
+            <p>Cria um bucket com nome baseado no projeto e um sufixo aleatório para garantir unicidade global:</p>
+            <pre><code>resource "aws_s3_bucket" "website" {
+  bucket = "${var.project_name}-${random_string.bucket_suffix.result}"
+}</code></pre>
+            
+            <div class="info-box">
+                <strong>Nota:</strong> O sufixo aleatório garante que o nome do bucket seja único globalmente, já que nomes de bucket S3 devem ser únicos em toda a AWS.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3. Segurança com Origin Access Identity (OAI)</h2>
+            
+            <h3>Bucket Privado</h3>
+            <p>O bucket é configurado como <strong>completamente privado</strong>, bloqueando qualquer acesso público direto:</p>
+            <pre><code>resource "aws_s3_bucket_public_access_block" "website" {
+  bucket = aws_s3_bucket.website.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}</code></pre>
+
+            <h3>Origin Access Identity</h3>
+            <p>Cria uma identidade especial do CloudFront que terá permissão exclusiva para acessar o bucket:</p>
+            <pre><code>resource "aws_cloudfront_origin_access_identity" "website" {
+  comment = "OAI for ${var.project_name}"
+}</code></pre>
+
+            <h3>Política do Bucket</h3>
+            <p>Permite acesso <strong>apenas</strong> via CloudFront OAI (não mais acesso público):</p>
+            <pre><code>resource "aws_s3_bucket_policy" "website" {
+  bucket = aws_s3_bucket.website.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Sid    = "AllowCloudFrontOAI"
+      Effect = "Allow"
+      Principal = {
+        AWS = aws_cloudfront_origin_access_identity.website.iam_arn
+      }
+      Action   = "s3:GetObject"
+      Resource = "${aws_s3_bucket.website.arn}/*"
+    }]
+  })
+}</code></pre>
+
+            <div class="warning-box">
+                <strong>Importante:</strong> Com OAI ativado, URLs diretas do S3 não funcionam mais. Todo acesso deve ser via CloudFront.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4. CloudFront Distribution</h2>
+            <p>Cria uma distribuição <strong>CloudFront</strong> que serve como CDN global. Principais configurações:</p>
+
+            <pre><code>resource "aws_cloudfront_distribution" "website" {
+  enabled             = true
+  is_ipv6_enabled     = true
+  default_root_object = "index.html"
+
+  origin {
+    domain_name = aws_s3_bucket.website.bucket_regional_domain_name
+    origin_id   = "S3-${aws_s3_bucket.website.id}"
+
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.website.cloudfront_access_identity_path
+    }
+  }
+
+  default_cache_behavior {
+    allowed_methods  = ["GET", "HEAD"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "S3-${aws_s3_bucket.website.id}"
+
+    viewer_protocol_policy = "redirect-to-https"
+    min_ttl                = 0
+    default_ttl            = 3600  # 1 hora
+    max_ttl                = 86400 # 24 horas
+  }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+
+  # Suporte para SPA (Single Page Application)
+  custom_error_response {
+    error_code         = 404
+    response_code      = 200
+    response_page_path = "/index.html"
+  }
+
+  custom_error_response {
+    error_code         = 403
+    response_code      = 200
+    response_page_path = "/index.html"
+  }
+}</code></pre>
+
+            <h3>Características Principais:</h3>
+            <ul>
+                <li><strong>HTTPS obrigatório</strong> - Redireciona HTTP para HTTPS automaticamente</li>
+                <li><strong>Cache de 1 hora</strong> - Reduz requisições ao S3 e melhora performance</li>
+                <li><strong>IPv6 habilitado</strong> - Suporte para protocolos modernos</li>
+                <li><strong>SPA Support</strong> - Erros 404/403 redirecionam para index.html (Vue Router)</li>
+                <li><strong>OAI configurado</strong> - Acesso seguro ao S3</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>5. Outputs</h2>
+            <p>Após a execução, o Terraform exibe informações úteis:</p>
+
+            <pre><code>output "s3_bucket_name" {
+  description = "Nome do bucket S3"
+  value       = aws_s3_bucket.website.id
+}
+
+output "cloudfront_domain" {
+  description = "Domínio do CloudFront"
+  value       = aws_cloudfront_distribution.website.domain_name
+}
+
+output "cloudfront_url" {
+  description = "URL completa do CloudFront"
+  value       = "https://${aws_cloudfront_distribution.website.domain_name}"
+}</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>6. Uso Rápido</h2>
+            
+            <h3>Inicializar o Terraform</h3>
+            <pre><code>cd iac/terraform
+terraform init</code></pre>
+
+            <h3>Ver o plano de execução</h3>
+            <pre><code>terraform plan</code></pre>
+
+            <h3>Criar a infraestrutura</h3>
+            <pre><code>terraform apply -auto-approve</code></pre>
+
+            <h3>Destruir a infraestrutura</h3>
+            <pre><code>terraform destroy -auto-approve</code></pre>
+
+            <div class="info-box">
+                <strong>Dica:</strong> Use o Makefile na raiz do projeto para comandos mais simples: <code>make deploy</code>, <code>make destroy</code>, etc.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Resumo dos Recursos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Recurso</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>S3 Bucket</strong></td>
+                        <td>Armazenamento privado dos arquivos estáticos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CloudFront</strong></td>
+                        <td>CDN global com HTTPS e cache</td>
+                    </tr>
+                    <tr>
+                        <td><strong>OAI</strong></td>
+                        <td>Identidade para acesso seguro S3 → CloudFront</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bucket Policy</strong></td>
+                        <td>Permite acesso apenas via OAI</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Public Access Block</strong></td>
+                        <td>Bloqueia completamente acesso público direto</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Custom Error Response</strong></td>
+                        <td>Suporte para aplicações SPA (Vue Router)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Requisitos</h2>
+            <ul>
+                <li><strong>Terraform</strong> instalado (v1.0 ou superior)</li>
+                <li><strong>Credenciais da AWS</strong> configuradas (via <code>aws configure</code>)</li>
+                <li><strong>Permissões IAM</strong> para criar S3, CloudFront e IAM (para OAI)</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 0.85rem;">Módulo 7 - DevOps (Devs2Blu)</p>
+            <a href="../ACESSE-Documentação Geral.html" class="back-button" style="margin-top: 15px;">← Voltar</a>
+        </div>
+    </div>
+</body>
+</html>

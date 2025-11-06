@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação do Projeto - Migração Azure → AWS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #FF9900;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .back-button:hover {
+            background: #ec7211;
+        }
+
+        h1 {
+            color: #232F3E;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #FF9900;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: #232F3E;
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 1.15rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: #666;
+            font-size: 1.05rem;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #c7254e;
+            font-size: 0.9rem;
+        }
+
+        pre {
+            background: #232F3E;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 12px 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        table th {
+            background: #232F3E;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .highlight-box {
+            background: #f9f9f9;
+            border-left: 4px solid #FF9900;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .cost-card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .cost-card h4 {
+            margin-top: 0;
+            color: #232F3E;
+        }
+
+        .cost-value {
+            color: #FF9900;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .architecture {
+            background: #232F3E;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+            margin: 15px 0;
+            font-family: monospace;
+            line-height: 1.8;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .benefit-card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+        }
+
+        .benefit-card h3 {
+            margin-top: 0;
+            color: #232F3E;
+            font-size: 1.1rem;
+        }
+
+        .benefit-card ul {
+            margin-left: 20px;
+        }
+
+        .conclusion-box {
+            background: #232F3E;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .conclusion-box h2 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .conclusion-box p {
+            color: white;
+        }
+
+        .conclusion-box strong {
+            color: #FF9900;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../ACESSE-Documentação Geral.html" class="back-button">← Voltar</a>
+
+        <h1>Migração Azure → AWS - Jewelry App</h1>
+
+        <div class="section">
+            <h2>Resumo do Projeto</h2>
+            <p>Migração de uma aplicação Vue.js de hospedagem Azure para AWS, implementando infraestrutura como código (IaC) com automação completa de deploy.</p>
+        </div>
+
+        <div class="section">
+            <h2>Objetivo</h2>
+            <p>Reduzir custos operacionais migrando de Azure para AWS, aproveitando serviços gerenciados otimizados para sites estáticos.</p>
+        </div>
+
+        <div class="section">
+            <h2>Tecnologias Utilizadas</h2>
+            
+            <h3>Frontend</h3>
+            <ul>
+                <li><strong>Vue.js 3</strong> - Framework JavaScript progressivo</li>
+                <li><strong>Vite 4</strong> - Build tool moderna e rápida</li>
+            </ul>
+
+            <h3>AWS Services</h3>
+            <ul>
+                <li><strong>S3</strong> - Storage de objetos para hospedar arquivos estáticos</li>
+                <li><strong>CloudFront</strong> - CDN global com HTTPS incluído</li>
+                <li><strong>OAI</strong> - Origin Access Identity para segurança (bucket privado)</li>
+            </ul>
+
+            <h3>Infraestrutura como Código</h3>
+            <ul>
+                <li><strong>Terraform</strong> - Provisionamento declarativo da infraestrutura</li>
+                <li><strong>Makefile</strong> - Automação de comandos de build e deploy</li>
+                <li><strong>Bash/PowerShell</strong> - Scripts de deploy multiplataforma</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Por Que AWS é Mais Barata?</h2>
+            
+            <h3>Sites Estáticos = Custo Mínimo</h3>
+            <ol>
+                <li><strong>Sem servidores</strong> - Não há VMs rodando 24/7</li>
+                <li><strong>Pague pelo uso</strong> - Apenas por requisições e transferência</li>
+                <li><strong>CloudFront com free tier</strong> - 1TB/mês grátis no primeiro ano</li>
+                <li><strong>S3 altamente otimizado</strong> - Storage extremamente barato</li>
+            </ol>
+
+            <h3>Comparativo com Servidores Tradicionais</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Recurso</th>
+                        <th>Servidor VM</th>
+                        <th>S3 + CloudFront</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Custo fixo mensal</td>
+                        <td>$10-50</td>
+                        <td>$0</td>
+                    </tr>
+                    <tr>
+                        <td>Escalabilidade</td>
+                        <td>Manual</td>
+                        <td>Automática</td>
+                    </tr>
+                    <tr>
+                        <td>Manutenção</td>
+                        <td>Alta</td>
+                        <td>Zero</td>
+                    </tr>
+                    <tr>
+                        <td>Performance global</td>
+                        <td>Limitada</td>
+                        <td>CDN mundial</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Estimativa de Custos AWS</h2>
+            
+            <h3>Cenário: E-commerce de Joalheria</h3>
+            <p><strong>Premissas:</strong></p>
+            <ul>
+                <li>Site com 100 páginas</li>
+                <li>Tamanho médio: 2MB por visita (HTML, CSS, JS, imagens)</li>
+                <li>Usuários navegam em média 5 páginas por sessão</li>
+            </ul>
+
+            <h3>Projeção de Custos por Nível de Tráfego</h3>
+
+            <div class="cost-card">
+                <h4>100 usuários/dia (3.000/mês)</h4>
+                <p>Requisições: ~15.000/mês<br>
+                Transferência: ~30 GB/mês</p>
+                <p class="cost-value">Custo estimado: $0.50 - $1.00/mês</p>
+            </div>
+
+            <div class="cost-card">
+                <h4>1.000 usuários/dia (30.000/mês)</h4>
+                <p>Requisições: ~150.000/mês<br>
+                Transferência: ~300 GB/mês</p>
+                <p class="cost-value">Custo estimado: $3.00 - $5.00/mês</p>
+            </div>
+
+            <div class="cost-card">
+                <h4>10.000 usuários/dia (300.000/mês)</h4>
+                <p>Requisições: ~1.5 milhões/mês<br>
+                Transferência: ~3 TB/mês</p>
+                <p class="cost-value">Custo estimado: $25.00 - $35.00/mês</p>
+            </div>
+
+            <div class="cost-card">
+                <h4>100.000 usuários/dia (3 milhões/mês)</h4>
+                <p>Requisições: ~15 milhões/mês<br>
+                Transferência: ~30 TB/mês</p>
+                <p class="cost-value">Custo estimado: $200.00 - $280.00/mês</p>
+            </div>
+
+            <h3>Breakdown dos Custos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Serviço</th>
+                        <th>Custo Base</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>S3 Storage</strong></td>
+                        <td>~$0.023/GB/mês</td>
+                    </tr>
+                    <tr>
+                        <td><strong>S3 Requests</strong></td>
+                        <td>$0.0004 por 1.000 requisições (GET)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CloudFront Transfer</strong></td>
+                        <td>$0.085/GB (primeiros 10TB)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>CloudFront Requests</strong></td>
+                        <td>$0.0075 por 10.000 requisições</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Arquitetura Implementada</h2>
+            
+            <div class="architecture">
+Usuario<br>
+   ↓<br>
+CloudFront (CDN Global - HTTPS)<br>
+   ↓<br>
+Origin Access Identity (OAI)<br>
+   ↓<br>
+S3 Bucket (Privado)
+            </div>
+
+            <h3>Benefícios de Segurança</h3>
+            <ul>
+                <li>Bucket S3 totalmente privado</li>
+                <li>Acesso apenas via CloudFront</li>
+                <li>HTTPS obrigatório</li>
+                <li>URLs diretas do S3 bloqueadas</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Automação de Deploy</h2>
+            
+            <h3>Comandos Disponíveis</h3>
+            <pre><code>make deploy      # Deploy completo (build + infra + upload)
+make update      # Atualizar código (build + upload + cache)
+make destroy     # Destruir infraestrutura
+make help        # Ver todos os comandos</code></pre>
+
+            <h3>Fluxo de Deploy Automatizado</h3>
+            <ol>
+                <li><strong>Build</strong> - Compila aplicação Vue.js com Vite</li>
+                <li><strong>Terraform Init</strong> - Inicializa providers AWS</li>
+                <li><strong>Terraform Apply</strong> - Cria S3 + CloudFront + OAI</li>
+                <li><strong>Upload</strong> - Sincroniza arquivos para S3</li>
+                <li><strong>Cache Invalidation</strong> - Limpa cache do CloudFront</li>
+            </ol>
+
+            <p><strong>Tempo total: ~15-20 minutos</strong> (CloudFront leva tempo para propagar)</p>
+        </div>
+
+        <div class="section">
+            <h2>Vantagens da Migração</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Operacionais</h3>
+                    <ul>
+                        <li>Deploy automatizado via Makefile</li>
+                        <li>Infraestrutura versionada (Terraform)</li>
+                        <li>Zero manutenção de servidores</li>
+                        <li>Rollback facilitado via Git + Terraform</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>Performance</h3>
+                    <ul>
+                        <li>CDN global com 450+ pontos de presença</li>
+                        <li>Cache inteligente no edge</li>
+                        <li>HTTPS incluído sem custo extra</li>
+                        <li>Latência reduzida globalmente</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card">
+                    <h3>Financeiras</h3>
+                    <ul>
+                        <li>Redução de até 80% nos custos</li>
+                        <li>Sem compromisso de longo prazo</li>
+                        <li>Pague apenas pelo que usar</li>
+                        <li>Free tier generoso (1TB/mês no 1º ano)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="conclusion-box">
+            <h2>Conclusão</h2>
+            <p>A migração de Azure para AWS para sites estáticos representa uma otimização significativa em:</p>
+            <ul>
+                <li><strong>Custo:</strong> Redução drástica por eliminar VMs</li>
+                <li><strong>Escalabilidade:</strong> Automática e transparente</li>
+                <li><strong>Manutenção:</strong> Praticamente zero</li>
+                <li><strong>Performance:</strong> CDN global de alto desempenho</li>
+            </ul>
+            <p style="margin-top: 15px;">Para um e-commerce de joalheria com tráfego moderado (1.000-10.000 visitas/dia), o custo mensal fica entre <strong>$3-35/mês</strong>, comparado a $50-200/mês em hospedagem tradicional.</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 0.85rem;"><strong>Módulo 7 - DevOps (Devs2Blu)</strong></p>
+            <p style="color: #999; font-size: 0.85rem; margin-top: 5px;">Infraestrutura automatizada com Terraform + Scripts + Makefile</p>
+            <a href="../ACESSE-Documentação Geral.html" class="back-button" style="margin-top: 15px;">← Voltar</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação Scripts - AWS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 35px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #FF9900;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .back-button:hover {
+            background: #ec7211;
+        }
+
+        h1 {
+            color: #232F3E;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            border-bottom: 3px solid #FF9900;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: #232F3E;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #c7254e;
+            font-size: 0.9rem;
+        }
+
+        pre {
+            background: #232F3E;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 12px 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .script-card {
+            background: #f9f9f9;
+            border-left: 4px solid #FF9900;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 4px;
+        }
+
+        .script-card h3 {
+            margin-top: 0;
+            color: #232F3E;
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            border-left: 4px solid #FF9900;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .warning-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        table th {
+            background: #232F3E;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .platform-badge {
+            display: inline-block;
+            background: #232F3E;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+        }
+
+        .bash-badge {
+            background: #4EAA25;
+        }
+
+        .powershell-badge {
+            background: #012456;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../ACESSE-Documentação Geral.html" class="back-button">← Voltar</a>
+
+        <h1>Documentação Scripts - Deployment AWS</h1>
+        
+        <p>Scripts automatizados para deploy da aplicação Vue.js na infraestrutura AWS. Disponível em <strong>Bash</strong> (Linux/Mac/WSL) e <strong>PowerShell</strong> (Windows).</p>
+
+        <div class="section">
+            <h2>Scripts Disponíveis</h2>
+            
+            <div class="script-card">
+                <h3><span class="platform-badge bash-badge">Bash</span> setup.sh</h3>
+                <p><strong>Localização:</strong> <code>iac/scripts/setup.sh</code></p>
+                <p><strong>Função:</strong> Verifica e instala dependências necessárias para o projeto</p>
+                <p><strong>Uso:</strong></p>
+                <pre><code>cd iac/scripts
+./setup.sh</code></pre>
+            </div>
+
+            <div class="script-card">
+                <h3><span class="platform-badge bash-badge">Bash</span> deploy.sh</h3>
+                <p><strong>Localização:</strong> <code>iac/scripts/deploy.sh</code></p>
+                <p><strong>Função:</strong> Deploy completo automatizado (build + infraestrutura + upload)</p>
+                <p><strong>Uso:</strong></p>
+                <pre><code>cd iac/scripts
+./deploy.sh</code></pre>
+            </div>
+
+            <div class="script-card">
+                <h3><span class="platform-badge powershell-badge">PowerShell</span> deploy.ps1</h3>
+                <p><strong>Localização:</strong> <code>iac/scripts/deploy.ps1</code></p>
+                <p><strong>Função:</strong> Deploy completo automatizado para Windows</p>
+                <p><strong>Uso:</strong></p>
+                <pre><code>cd iac/scripts
+.\deploy.ps1</code></pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>setup.sh - Configuração do Ambiente</h2>
+            
+            <h3>O que o script faz:</h3>
+            <ul>
+                <li>Cria arquivos de configuração do shell (.bashrc, .zshrc, .profile) se não existirem</li>
+                <li>Verifica se Node.js está instalado</li>
+                <li>Oferece instalação automática via nvm (se necessário)</li>
+                <li>Verifica se npm está disponível</li>
+                <li>Verifica se Terraform está instalado</li>
+                <li>Verifica se AWS CLI está instalado e configurado</li>
+                <li>Verifica se make está disponível</li>
+                <li>Exibe versões de todas as ferramentas</li>
+            </ul>
+
+            <h3>Verificações e Instalações:</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ferramenta</th>
+                        <th>Ação</th>
+                        <th>Instalação Automática</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Node.js</td>
+                        <td>Verifica instalação</td>
+                        <td>Sim (via nvm)</td>
+                    </tr>
+                    <tr>
+                        <td>npm</td>
+                        <td>Verifica instalação</td>
+                        <td>Vem com Node.js</td>
+                    </tr>
+                    <tr>
+                        <td>Terraform</td>
+                        <td>Verifica instalação</td>
+                        <td>Sim (Linux)</td>
+                    </tr>
+                    <tr>
+                        <td>AWS CLI</td>
+                        <td>Verifica instalação + credenciais</td>
+                        <td>Sim (Linux)</td>
+                    </tr>
+                    <tr>
+                        <td>make</td>
+                        <td>Verifica instalação</td>
+                        <td>Sim (apt-get)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box">
+                <strong>Dica:</strong> Execute este script <strong>antes</strong> de tentar fazer o deploy. Ele garante que todas as dependências estão instaladas.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>deploy.sh / deploy.ps1 - Deploy Automatizado</h2>
+            
+            <h3>Fluxo de Execução:</h3>
+            <ol>
+                <li><strong>Verificação de Dependências</strong>
+                    <ul>
+                        <li>Verifica se Node.js está instalado</li>
+                        <li>Verifica se npm está instalado</li>
+                        <li>Verifica se Terraform está instalado</li>
+                        <li>Verifica se AWS CLI está instalado</li>
+                        <li>Exibe versões de cada ferramenta</li>
+                    </ul>
+                </li>
+                <li><strong>Build da Aplicação</strong>
+                    <ul>
+                        <li>Executa <code>npm install</code> com tratamento de erros</li>
+                        <li>Executa <code>npm run build</code> com verificação de sucesso</li>
+                        <li>Valida se a pasta <code>dist/</code> foi criada</li>
+                    </ul>
+                </li>
+                <li><strong>Inicialização do Terraform</strong>
+                    <ul>
+                        <li>Executa <code>terraform init</code> no diretório <code>iac/terraform</code></li>
+                    </ul>
+                </li>
+                <li><strong>Aplicação da Infraestrutura</strong>
+                    <ul>
+                        <li>Executa <code>terraform apply -auto-approve</code></li>
+                        <li>Cria S3, CloudFront e OAI na AWS</li>
+                    </ul>
+                </li>
+                <li><strong>Upload dos Arquivos</strong>
+                    <ul>
+                        <li>Obtém o nome do bucket via <code>terraform output</code></li>
+                        <li>Sincroniza arquivos da pasta <code>dist/</code> para o S3</li>
+                        <li>Usa flag <code>--delete</code> para remover arquivos antigos</li>
+                    </ul>
+                </li>
+                <li><strong>Invalidação do Cache</strong>
+                    <ul>
+                        <li>Obtém o ID da distribuição CloudFront</li>
+                        <li>Cria invalidação para o caminho <code>/*</code></li>
+                    </ul>
+                </li>
+                <li><strong>Exibição da URL</strong>
+                    <ul>
+                        <li>Mostra a URL do CloudFront para acessar a aplicação</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Tratamento de Erros:</h3>
+            <p>Os scripts param a execução imediatamente se:</p>
+            <ul>
+                <li>Alguma ferramenta necessária não estiver instalada</li>
+                <li>O build do npm falhar</li>
+                <li>A pasta dist/ não for criada</li>
+                <li>Não conseguir obter o nome do bucket</li>
+                <li>O upload para S3 falhar</li>
+            </ul>
+
+            <div class="warning-box">
+                <strong>Importante:</strong> Os scripts usam <code>terraform apply -auto-approve</code>, o que significa que <strong>não há confirmação manual</strong>. Revise suas configurações antes de executar.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Diferenças entre Bash e PowerShell</h2>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Bash (deploy.sh)</th>
+                        <th>PowerShell (deploy.ps1)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Plataforma</td>
+                        <td>Linux, Mac, WSL</td>
+                        <td>Windows</td>
+                    </tr>
+                    <tr>
+                        <td>Verificação de comandos</td>
+                        <td><code>command -v</code></td>
+                        <td><code>Get-Command</code></td>
+                    </tr>
+                    <tr>
+                        <td>Verificação de pasta</td>
+                        <td><code>[ ! -d "dist" ]</code></td>
+                        <td><code>-not (Test-Path "dist")</code></td>
+                    </tr>
+                    <tr>
+                        <td>Tratamento de erros</td>
+                        <td><code>set -e</code> + if statements</td>
+                        <td><code>$ErrorActionPreference = "Stop"</code> + try/catch</td>
+                    </tr>
+                    <tr>
+                        <td>Exibição de versão</td>
+                        <td><code>$(node --version)</code></td>
+                        <td><code>$(node --version)</code></td>
+                    </tr>
+                    <tr>
+                        <td>Cores no terminal</td>
+                        <td>Escape codes ANSI</td>
+                        <td><code>Write-Host -ForegroundColor</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Exemplos de Uso</h2>
+            
+            <h3>Primeira vez (Linux/Mac/WSL):</h3>
+            <pre><code># 1. Configurar ambiente
+cd iac/scripts
+chmod +x *.sh
+./setup.sh
+
+# 2. Fazer deploy
+./deploy.sh</code></pre>
+
+            <h3>Primeira vez (Windows PowerShell):</h3>
+            <pre><code># 1. Permitir execução de scripts (executar como Admin)
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+# 2. Fazer deploy
+cd iac\scripts
+.\deploy.ps1</code></pre>
+
+            <h3>Deploy subsequente:</h3>
+            <pre><code># Linux/Mac/WSL
+./deploy.sh
+
+# Windows
+.\deploy.ps1</code></pre>
+
+            <div class="info-box">
+                <strong>Alternativa:</strong> Use o Makefile na raiz do projeto para simplificar: <code>make deploy</code>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Estrutura de Pastas</h2>
+            <pre><code>iac/
+├── scripts/
+│   ├── setup.sh           # Configuração do ambiente (Bash)
+│   ├── deploy.sh          # Deploy automatizado (Bash)
+│   └── deploy.ps1         # Deploy automatizado (PowerShell)
+├── terraform/
+│   └── main.tf            # Configuração Terraform
+└── README.md              # Documentação da infraestrutura</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>Requisitos</h2>
+            <ul>
+                <li><strong>Node.js 16+</strong> e npm</li>
+                <li><strong>Terraform 1.0+</strong></li>
+                <li><strong>AWS CLI</strong> configurado com credenciais válidas</li>
+                <li><strong>Bash</strong> (Linux/Mac/WSL) ou <strong>PowerShell 5.1+</strong> (Windows)</li>
+                <li><strong>Permissões AWS</strong> para criar S3, CloudFront e IAM (OAI)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Solução de Problemas</h2>
+            
+            <h3>Erro: "command not found" ou "não reconhecido"</h3>
+            <p>Execute o <code>setup.sh</code> primeiro para instalar as dependências.</p>
+
+            <h3>Erro: "npm install failed"</h3>
+            <p>Verifique:</p>
+            <ul>
+                <li>Conexão com internet</li>
+                <li>Permissões de escrita na pasta</li>
+                <li>Arquivo package.json existe</li>
+            </ul>
+
+            <h3>Erro: "AccessDenied" no S3</h3>
+            <p>Configure suas credenciais AWS:</p>
+            <pre><code>aws configure</code></pre>
+
+            <h3>PowerShell: "script não pode ser carregado"</h3>
+            <p>Ajuste a política de execução:</p>
+            <pre><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></pre>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 0.85rem;">Módulo 7 - DevOps (Devs2Blu)</p>
+            <a href="../ACESSE-Documentação Geral.html" class="back-button" style="margin-top: 15px;">← Voltar</a>
+        </div>
+    </div>
+</body>
+</html>

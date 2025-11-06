@@ -1,99 +1,214 @@
-# Jewelry App
+# 💎 Jewelry App - AWS Migration
 
-Aplicação Vue.js para exibição de joias com deploy automatizado no Azure usando Terraform.
+> Aplicação Vue.js hospedada na AWS usando S3 + CloudFront com Terraform
 
-## Pré-requisitos
+[![AWS](https://img.shields.io/badge/AWS-S3%20%2B%20CloudFront-orange)](https://aws.amazon.com/)
+[![Terraform](https://img.shields.io/badge/Terraform-1.0%2B-purple)](https://www.terraform.io/)
+[![Vue.js](https://img.shields.io/badge/Vue.js-3-green)](https://vuejs.org/)
+
+---
+
+## 🚀 Início Rápido
+
+### Pré-requisitos
 
 - Node.js 18+
-- Docker
-- Terraform
-- Azure CLI (para deploy)
+- Terraform 1.0+
+- AWS CLI configurado
+- Make instalado
 
-## Execução Local
+### Deploy
 
-### Desenvolvimento
+```bash
+# 1. Configurar AWS
+aws configure
+
+# 2. Executar setup (primeira vez)
+./iac/scripts/setup.sh
+
+# 3. Fazer deploy
+make deploy
+```
+
+---
+
+## 📂 Estrutura do Projeto
+
+```
+modulo7-iac_tooling/
+├── src/                    # Código Vue.js
+│   ├── App.vue
+│   └── main.js
+│
+├── iac/                    # Infraestrutura
+│   ├── terraform/         # Configuração Terraform
+│   │   ├── main.tf       # Recursos AWS (S3 + CloudFront)
+│   │   └── terraform.tfvars.example
+│   │
+│   └── scripts/           # Scripts de automação
+│       ├── setup.sh      # Setup do ambiente
+│       ├── deploy.sh     # Deploy (Bash)
+│       └── deploy.ps1    # Deploy (PowerShell)
+│
+├── Makefile               # Comandos automatizados
+├── package.json           # Dependências Node.js
+├── vite.config.js         # Config Vite
+└── index.html             # HTML principal
+```
+
+---
+
+## 🛠️ Comandos Principais
+
+### Make (Recomendado)
+
+```bash
+make deploy      # Deploy completo
+make update      # Atualizar aplicação
+make get-url     # Ver URL do CloudFront
+make destroy     # Remover infraestrutura
+make clean       # Limpar arquivos temporários
+```
+
+### Scripts Manuais
+
+```bash
+# Setup do ambiente (primeira vez)
+./iac/scripts/setup.sh
+
+# Deploy
+./iac/scripts/deploy.sh      # Linux/Mac
+./iac/scripts/deploy.ps1     # Windows
+```
+
+---
+
+## 🏗️ Infraestrutura AWS
+
+### Recursos Provisionados
+
+| Recurso | Descrição | Custo |
+|---------|-----------|-------|
+| **S3 Bucket** | Hospedagem estática | ~$0.02/mês |
+| **CloudFront** | CDN global + HTTPS | Free tier 1TB/mês |
+
+### Arquitetura
+
+```
+┌─────────┐
+│ Usuário │
+└────┬────┘
+     │ HTTPS
+     ▼
+┌────────────┐
+│ CloudFront │ ◄── CDN + SSL
+└─────┬──────┘
+      │ HTTP
+      ▼
+┌────────────┐
+│ S3 Bucket  │ ◄── Static Hosting
+└────────────┘
+```
+
+---
+
+## 💻 Desenvolvimento Local
+
 ```bash
 # Instalar dependências
 npm install
 
-# Executar em modo desenvolvimento
+# Modo desenvolvimento
 npm run dev
-```
-Acesse: http://localhost:5173
 
-### Docker Local
-```bash
-# Usando Makefile
-make docker-run
-
-# Ou manualmente
-docker build -t jewelry-app .
-docker run -p 8080:80 jewelry-app
-```
-Acesse: http://localhost:8080
-
-## Deploy no Azure
-
-### Configuração Inicial
-```bash
-# Login no Azure
-az login
-
-# Configurar credenciais (se necessário)
-az account set --subscription "sua-subscription-id"
+# Build
+npm run build
 ```
 
-### Deploy Automatizado
+---
+
+## 📝 Workflow
+
+### Primeiro Deploy
+
 ```bash
-# Deploy completo (build + infraestrutura + aplicação)
-make azure-deploy
-```
+# 1. Configurar AWS
+aws configure
 
-### Deploy Manual
-```bash
-# 1. Inicializar Terraform
-make init
-
-# 2. Planejar mudanças
-make plan
-
-# 3. Aplicar infraestrutura
-make apply
-
-# 4. Build e deploy da aplicação
+# 2. Deploy
 make deploy
+
+# 3. Aguardar ~20 min (CloudFront)
+
+# 4. Acessar URL
+make get-url
 ```
 
-## Comandos Úteis
+### Atualizar Código
 
 ```bash
-# Build da aplicação
-make build
+# 1. Editar src/App.vue
+# 2. Atualizar
+make update
+```
 
-# Limpar arquivos temporários
+---
+
+## 🔧 Configuração
+
+### Variáveis Terraform
+
+Copie e edite o arquivo de exemplo:
+
+```bash
+cp iac/terraform/terraform.tfvars.example iac/terraform/terraform.tfvars
+```
+
+Edite conforme necessário:
+
+```terraform
+aws_region   = "us-east-1"
+project_name = "jewelry-app"
+```
+
+---
+
+## 🗑️ Limpeza
+
+```bash
+# Remover infraestrutura AWS
+make destroy
+
+# Limpar arquivos locais
 make clean
-
-# Destruir infraestrutura Azure
-make azure-destroy
 ```
 
-## Estrutura do Projeto
+---
 
-```
-├── src/           # Código fonte Vue.js
-├── main.tf        # Configuração Terraform
-├── Dockerfile     # Container da aplicação
-├── Makefile       # Comandos automatizados
-└── deploy.sh      # Script de deploy
-```
+## 📚 Tecnologias
 
-## Infraestrutura Azure
+- **Vue.js 3** - Framework JavaScript
+- **Vite 4** - Build tool
+- **Terraform** - Infrastructure as Code
+- **AWS S3** - Object storage
+- **AWS CloudFront** - CDN
 
-O Terraform provisiona:
-- Resource Group
-- Virtual Network e Subnet
-- Network Security Group
-- VM Linux com Docker
-- IP Público
+---
 
-A aplicação roda na porta 8080 da VM.
+## 🎓 Projeto Devs2Blu
+
+**Módulo 7**: DevOps  
+**Desafio**: Migração para AWS usando IaC  
+**Autor**: Yan Hausmann
+
+---
+
+## 📞 Suporte
+
+- [AWS Documentation](https://docs.aws.amazon.com/)
+- [Terraform Documentation](https://www.terraform.io/docs)
+- [Vue.js Documentation](https://vuejs.org/)
+
+---
+
+**Desenvolvido para o curso Devs2Blu** 🚀
