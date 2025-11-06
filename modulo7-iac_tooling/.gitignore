@@ -1,0 +1,14 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Build
+dist/
+node_modules/
+package-lock.json
+
+# IDE
+.vscode/
+.idea/

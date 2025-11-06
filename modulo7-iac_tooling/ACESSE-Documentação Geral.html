@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação - Migração Azure → AWS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        .header {
+            border-bottom: 3px solid #FF9900;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #232F3E;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .presentation-card {
+            background: #f9f9f9;
+            border-left: 4px solid #FF9900;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+
+        .presentation-card h2 {
+            color: #232F3E;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .presentation-card p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .presentation-card a {
+            display: inline-block;
+            background: #FF9900;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .presentation-card a:hover {
+            background: #ec7211;
+        }
+
+        .docs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .doc-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .doc-card:hover {
+            border-color: #FF9900;
+            box-shadow: 0 2px 8px rgba(255, 153, 0, 0.2);
+        }
+
+        .doc-card h3 {
+            color: #232F3E;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .doc-card p {
+            color: #666;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .doc-card a {
+            display: inline-block;
+            background: #232F3E;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: background 0.3s ease;
+        }
+
+        .doc-card a:hover {
+            background: #FF9900;
+        }
+
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 0.85rem;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .footer strong {
+            color: #FF9900;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .docs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Documentação - Migração Azure → AWS</h1>
+            <p>Jewelry App</p>
+        </div>
+
+        <p class="subtitle">
+            Projeto de migração de uma aplicação Vue.js para AWS utilizando infraestrutura como código (IaC)
+            com Terraform, automação via Makefile e scripts de deploy multiplataforma.
+        </p>
+
+        <div class="presentation-card">
+            <h2>Apresentação do Projeto</h2>
+            <p>Visão geral da migração, tecnologias utilizadas, arquitetura e estimativas de custo</p>
+            <a href="docs/Documentacao_Proposta.html">Ver Apresentação</a>
+        </div>
+
+        <div class="docs-grid">
+            <div class="doc-card">
+                <h3>Terraform</h3>
+                <p>Infraestrutura como código: S3, CloudFront e OAI</p>
+                <a href="docs/Documentacao_Terraform_AWS.html">Acessar</a>
+            </div>
+
+            <div class="doc-card">
+                <h3>Makefile</h3>
+                <p>Automação de comandos de build, deploy e destroy</p>
+                <a href="docs/Documentacao_Makefile_AWS.html">Acessar</a>
+            </div>
+
+            <div class="doc-card">
+                <h3>Scripts</h3>
+                <p>Deploy automatizado com Bash e PowerShell</p>
+                <a href="docs/Documentacao_Scripts_AWS.html">Acessar</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Módulo 7 - DevOps</strong> | Devs2Blu</p>
+            <p>Desenvolvido por: Yan Hausmann</p>
+        </div>
+    </div>
+</body>
+</html>

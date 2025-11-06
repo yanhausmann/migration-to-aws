@@ -1,0 +1,13 @@
+# Arquivo de variáveis Terraform (opcional)
+# Copie este arquivo para terraform.tfvars e edite conforme necessário
+
+# Região da AWS onde os recursos serão criados
+# aws_region = "us-east-1"
+
+# Nome do projeto (será usado no nome do bucket)
+# project_name = "jewelry-app"
+
+# Exemplos de outras regiões AWS:
+# aws_region = "us-west-2"      # Oregon
+# aws_region = "sa-east-1"      # São Paulo
+# aws_region = "eu-west-1"      # Irlanda

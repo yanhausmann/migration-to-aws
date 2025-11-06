@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação Makefile - AWS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 35px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #FF9900;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: background 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .back-button:hover {
+            background: #ec7211;
+        }
+
+        h1 {
+            color: #232F3E;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            border-bottom: 3px solid #FF9900;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+
+        h2 {
+            color: #232F3E;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 1.05rem;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        li {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #c7254e;
+            font-size: 0.9rem;
+        }
+
+        pre {
+            background: #232F3E;
+            color: #f8f8f2;
+            padding: 12px;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            line-height: 1.4;
+            font-size: 0.85rem;
+        }
+
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+
+        .command-card {
+            background: #f9f9f9;
+            border-left: 4px solid #FF9900;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 4px;
+        }
+
+        .command-card h3 {
+            margin-top: 0;
+            color: #232F3E;
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            border-left: 4px solid #FF9900;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .success-box {
+            background: #f1f8f4;
+            border-left: 4px solid #28a745;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .warning-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+
+        table th {
+            background: #232F3E;
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f9f9f9;
+        }
+
+        .section {
+            margin-bottom: 25px;
+        }
+
+        .workflow {
+            background: #232F3E;
+            color: white;
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .workflow h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .workflow ol {
+            margin-left: 20px;
+        }
+
+        .workflow li {
+            color: white;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../ACESSE-Documentação Geral.html" class="back-button">← Voltar</a>
+
+        <h1>Documentação Makefile - AWS S3 + CloudFront</h1>
+        
+        <p>Este <strong>Makefile</strong> automatiza o processo de build, deploy e gerenciamento de infraestrutura na AWS utilizando <strong>Terraform</strong>, <strong>S3</strong> e <strong>CloudFront</strong>.</p>
+
+        <div class="section">
+            <h2>Comandos Disponíveis</h2>
+
+            <div class="command-card">
+                <h3>1. make deploy</h3>
+                <p>Executa o processo completo: build da aplicação, criação da infraestrutura e upload para o S3. Também exibe a URL do CloudFront ao final.</p>
+                <pre><code>make deploy</code></pre>
+                <p><strong>Fluxo:</strong> build → init → apply → upload → get-url</p>
+            </div>
+
+            <div class="command-card">
+                <h3>2. make build</h3>
+                <p>Instala as dependências e gera a versão de produção da aplicação Vue.js.</p>
+                <pre><code>make build</code></pre>
+                <p><strong>Executa:</strong> <code>npm install && npm run build</code></p>
+            </div>
+
+            <div class="command-card">
+                <h3>3. make init</h3>
+                <p>Inicializa o Terraform dentro do diretório <code>iac/terraform</code>.</p>
+                <pre><code>make init</code></pre>
+                <p><strong>Executa:</strong> <code>cd iac/terraform && terraform init</code></p>
+            </div>
+
+            <div class="command-card">
+                <h3>4. make plan</h3>
+                <p>Mostra o plano de execução do Terraform, exibindo as alterações que serão feitas.</p>
+                <pre><code>make plan</code></pre>
+                <p><strong>Executa:</strong> <code>cd iac/terraform && terraform plan</code></p>
+            </div>
+
+            <div class="command-card">
+                <h3>5. make apply</h3>
+                <p>Aplica a infraestrutura na AWS automaticamente (sem confirmação manual).</p>
+                <pre><code>make apply</code></pre>
+                <p><strong>Executa:</strong> <code>cd iac/terraform && terraform apply -auto-approve</code></p>
+            </div>
+
+            <div class="command-card">
+                <h3>6. make upload</h3>
+                <p>Envia os arquivos do diretório <code>dist/</code> para o bucket S3 criado pelo Terraform.</p>
+                <pre><code>make upload</code></pre>
+                <p><strong>Usa:</strong> <code>aws s3 sync</code> com o bucket obtido via <code>terraform output</code></p>
+            </div>
+
+            <div class="command-card">
+                <h3>7. make get-url</h3>
+                <p>Mostra a URL do CloudFront e o nome do bucket S3 gerados pelo Terraform.</p>
+                <pre><code>make get-url</code></pre>
+                <p><strong>Exibe:</strong> CloudFront URL e S3 bucket name</p>
+            </div>
+
+            <div class="command-card">
+                <h3>8. make invalidate</h3>
+                <p>Invalida o cache do CloudFront para que as alterações do frontend sejam refletidas imediatamente.</p>
+                <pre><code>make invalidate</code></pre>
+                <p><strong>Usa:</strong> <code>aws cloudfront create-invalidation</code></p>
+            </div>
+
+            <div class="command-card">
+                <h3>9. make update</h3>
+                <p>Atualiza a aplicação (rebuild, upload e invalidação do cache).</p>
+                <pre><code>make update</code></pre>
+                <p><strong>Fluxo:</strong> build → upload → invalidate</p>
+            </div>
+
+            <div class="command-card">
+                <h3>10. make destroy</h3>
+                <p>Destrói toda a infraestrutura criada na AWS, após confirmação do usuário.</p>
+                <pre><code>make destroy</code></pre>
+                <div class="warning-box">
+                    <strong>⚠️ Atenção:</strong> Este comando solicitará confirmação antes de destruir os recursos.
+                </div>
+            </div>
+
+            <div class="command-card">
+                <h3>11. make clean</h3>
+                <p>Remove arquivos temporários, diretórios de build e artefatos do Terraform.</p>
+                <pre><code>make clean</code></pre>
+                <p><strong>Remove:</strong> <code>node_modules</code>, <code>dist</code>, <code>.terraform</code>, <code>terraform.tfstate*</code></p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Uso Rápido</h2>
+
+            <div class="success-box">
+                <h3>Para fazer o deploy completo:</h3>
+                <pre><code>make deploy</code></pre>
+                <p>Este comando executa todo o fluxo: build, infraestrutura e upload.</p>
+            </div>
+
+            <div class="info-box">
+                <h3>Para apenas atualizar o frontend:</h3>
+                <pre><code>make update</code></pre>
+                <p>Use este comando quando fizer alterações apenas no código Vue.js.</p>
+            </div>
+
+            <div class="warning-box">
+                <h3>Para destruir toda a infraestrutura:</h3>
+                <pre><code>make destroy</code></pre>
+                <p>Cuidado: este comando remove todos os recursos AWS criados pelo Terraform.</p>
+            </div>
+        </div>
+
+        <div class="workflow">
+            <h3>Fluxo de Deploy Completo (make deploy)</h3>
+            <ol>
+                <li><strong>Build</strong> - Compila a aplicação Vue.js com Vite</li>
+                <li><strong>Init</strong> - Inicializa providers do Terraform</li>
+                <li><strong>Apply</strong> - Cria S3 + CloudFront + OAI na AWS</li>
+                <li><strong>Upload</strong> - Sincroniza arquivos <code>dist/</code> para S3</li>
+                <li><strong>Get URL</strong> - Exibe a URL do CloudFront</li>
+            </ol>
+            <p><strong>Tempo estimado:</strong> 15-20 minutos (CloudFront leva tempo para propagar)</p>
+        </div>
+
+        <div class="section">
+            <h2>Tabela de Comandos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Comando</th>
+                        <th>Descrição</th>
+                        <th>Uso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>make help</code></td>
+                        <td>Mostra todos os comandos disponíveis</td>
+                        <td>Consulta</td>
+                    </tr>
+                    <tr>
+                        <td><code>make deploy</code></td>
+                        <td>Deploy completo (primeira vez)</td>
+                        <td>Deploy inicial</td>
+                    </tr>
+                    <tr>
+                        <td><code>make build</code></td>
+                        <td>Apenas build da aplicação</td>
+                        <td>Teste local</td>
+                    </tr>
+                    <tr>
+                        <td><code>make init</code></td>
+                        <td>Inicializa Terraform</td>
+                        <td>Configuração</td>
+                    </tr>
+                    <tr>
+                        <td><code>make plan</code></td>
+                        <td>Ver mudanças antes de aplicar</td>
+                        <td>Validação</td>
+                    </tr>
+                    <tr>
+                        <td><code>make apply</code></td>
+                        <td>Cria/atualiza infraestrutura</td>
+                        <td>Infraestrutura</td>
+                    </tr>
+                    <tr>
+                        <td><code>make upload</code></td>
+                        <td>Upload de arquivos para S3</td>
+                        <td>Deploy frontend</td>
+                    </tr>
+                    <tr>
+                        <td><code>make get-url</code></td>
+                        <td>Ver URL do CloudFront</td>
+                        <td>Consulta</td>
+                    </tr>
+                    <tr>
+                        <td><code>make invalidate</code></td>
+                        <td>Limpar cache do CloudFront</td>
+                        <td>Atualização</td>
+                    </tr>
+                    <tr>
+                        <td><code>make update</code></td>
+                        <td>Atualizar código (build+upload+cache)</td>
+                        <td>Atualizações</td>
+                    </tr>
+                    <tr>
+                        <td><code>make destroy</code></td>
+                        <td>Destruir toda a infraestrutura</td>
+                        <td>Limpeza</td>
+                    </tr>
+                    <tr>
+                        <td><code>make clean</code></td>
+                        <td>Limpar arquivos temporários</td>
+                        <td>Limpeza local</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Requisitos</h2>
+            <ul>
+                <li><strong>Node.js e npm</strong> - Para build da aplicação Vue.js</li>
+                <li><strong>Terraform</strong> - Versão 1.0 ou superior</li>
+                <li><strong>AWS CLI</strong> - Configurado com credenciais válidas</li>
+                <li><strong>Make</strong> - Utilitário de automação (geralmente pré-instalado no Linux/Mac)</li>
+                <li><strong>Bash</strong> - Shell para execução dos comandos (ou WSL no Windows)</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Dicas de Uso</h2>
+            <div class="info-box">
+                <p><strong>1. Primeiro Deploy:</strong></p>
+                <pre><code>make deploy</code></pre>
+                <p>Execute este comando para criar toda a infraestrutura e fazer o primeiro deploy.</p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>2. Atualizações de Código:</strong></p>
+                <pre><code>make update</code></pre>
+                <p>Mais rápido que <code>make deploy</code>, pois não recria a infraestrutura.</p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>3. Verificar Mudanças Antes de Aplicar:</strong></p>
+                <pre><code>make plan</code></pre>
+                <p>Sempre execute antes de <code>make apply</code> para ver o que será alterado.</p>
+            </div>
+
+            <div class="warning-box">
+                <p><strong>4. Cache do CloudFront:</strong></p>
+                <p>Após fazer upload de novos arquivos, sempre execute <code>make invalidate</code> para limpar o cache, ou use <code>make update</code> que já faz isso automaticamente.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+            <p style="color: #999; font-size: 0.85rem;">Módulo 7 - DevOps (Devs2Blu)</p>
+            <a href="../ACESSE-Documentação Geral.html" class="back-button" style="margin-top: 15px;">← Voltar</a>
+        </div>
+    </div>
+</body>
+</html>
